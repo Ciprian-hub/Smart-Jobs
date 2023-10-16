@@ -14,16 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // All jobs
-Route::get('/', function () {
-    return view('index', [
-        'heading' => "Latest Jobs",
-        'job' => Job::all()
-    ]);
-});
-// Single job
-Route::get('/jobs/{id}', function ($id) {
-    return view('job', [
-        'job' => Job::find($id),
-    ]);
+Route::get('/', [\App\Http\Controllers\JobController::class, 'index']);
+Route::post('/jobs', [\App\Http\Controllers\JobController::class, 'store']);
+Route::get('/jobs/create', [\App\Http\Controllers\JobController::class, 'create']);
 
-});
+
+
+// Single job
+Route::get('/jobs/{job}', [\App\Http\Controllers\JobController::class, 'show']);

@@ -16,23 +16,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Job::factory(5)->create();
-         \App\Models\User::factory(5)->create();
+//        Job::factory(5)->create();
+//         \App\Models\User::factory(5)->create();
 
 //         \App\Models\User::factory(4)->create([
 //             'name' => 'Test User',
 //             'email' => 'test@example.com',
 //         ]);
 
-//        Job::create([
-//            'title' => 'Software dev',
-//            'tags' => 'laravel, javascript',
-//            'company' => 'RTD Corp',
-//            'location' => 'Texas, Ua',
-//            'email' => 'rtd@email.com',
-//            'web' => 'https://www.rtd.com',
-//            'description' => 'These routes are loaded by the RouteServiceProvider and all of them will Here is where you can register web routes for your application.'
-//        ]);
+        Job::create([
+            'title' => 'Software dev',
+            'tags' => 'laravel, javascript',
+            'company' => 'RTD Corp',
+            'location' => 'Texas, Ua',
+            'email' => 'rtd@email.com',
+            'web' => 'https://www.rtd.com',
+            'description' => 'These routes are loaded by the RouteServiceProvider and all of them will Here is where you can register web routes for your application.'
+        ]);
 //
 //        Job::create([
 //            'title' => 'Hardware engineer',

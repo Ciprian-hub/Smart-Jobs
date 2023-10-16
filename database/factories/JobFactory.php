@@ -19,7 +19,7 @@ class JobFactory extends Factory
     {
         return [
             'title' => fake()->name(),
-            'tags' => 'tag1, tag2, tag3',
+            'tags' => 'software, dev, tag3',
             'company' => fake()->company(),
             'location' => fake()->address(),
             'web' => fake()->url(),
