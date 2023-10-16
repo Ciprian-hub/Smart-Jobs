@@ -10,7 +10,7 @@ class Job extends Model
     use HasFactory;
 
     // Model::unguard() fom boot(): ServiceProvider allow this mass assignment
-    protected $fillable = ['title', 'company', 'location', 'email', 'web', 'tags', 'description'];
+//    protected $fillable = ['title', 'company', 'location', 'email', 'web', 'tags', 'description'];
 
     public function scopeFilter($query, array $filters): void
     {
@@ -22,4 +22,9 @@ class Job extends Model
         }
     }
 
+    // Relationship to user
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

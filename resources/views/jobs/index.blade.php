@@ -37,4 +37,7 @@
         <x-job-card :item="$item" />
         @endforeach
     </div>
+    <div class="mt-6 p-4 w-full">
+        {{$job->links()}}
+    </div>
 @endsection

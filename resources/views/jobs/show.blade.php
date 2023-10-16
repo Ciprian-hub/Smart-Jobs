@@ -18,10 +18,27 @@
                 <p>grid grid-cols-1 gap-6 sm:grid-cols-2 mx-auto</p>
             </div>
 {{--            <x-job-tags :jobTags="$job['tags']"/>--}}
-            <img class="rounded-t-lg p-5" src="/images/dummy.jpeg" alt="" />
+            <img class="rounded-t-lg p-5"  src="{{$job->logo ? asset('storage/' . $job->logo) : "/images/dummy.jpeg"}}"
+             alt= "" />
         </div>
         <div class="flex flex-col justify-between">
             <div>
+                <div class="bg-gray-90">
+                    <form method="post" action="/jobs/{{$job->id}}">
+                        @csrf
+                        @method("DELETE")
+                        <button>
+                            delete
+                        </button>
+                    </form>
+
+                    <a href="/jobs/{{$job->id}}/edit">
+                        <button>
+                            edit
+                        </button>
+                    </a>
+                </div>
+
                 <h3>Details</h3>
                 <hr>
                 <h3>Skills</h3>

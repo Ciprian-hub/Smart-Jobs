@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('tags');
             $table->string('company');
             $table->string('location');
             $table->string('email');
             $table->string('web');
             $table->longText('description');
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

@@ -15,10 +15,27 @@ use Illuminate\Support\Facades\Route;
 */
 // All jobs
 Route::get('/', [\App\Http\Controllers\JobController::class, 'index']);
-Route::post('/jobs', [\App\Http\Controllers\JobController::class, 'store']);
-Route::get('/jobs/create', [\App\Http\Controllers\JobController::class, 'create']);
+//Store Jobs data
+Route::post('/jobs', [\App\Http\Controllers\JobController::class, 'store'])->middleware('auth');
+//Show create form
+Route::get('/jobs/create', [\App\Http\Controllers\JobController::class, 'create'])->middleware('auth');
+//Show edit form
+Route::get("/jobs/{job}/edit", [\App\Http\Controllers\JobController::class, 'edit']);
+// Edit Submit to Update
+Route::put('/jobs/{job}', [\App\Http\Controllers\JobController::class, 'update'])->middleware('auth');
+// Delete Job
+Route::delete('/jobs/{job}', [\App\Http\Controllers\JobController::class, 'destroy'])->middleware('auth');
 
-
+// manage Jobs
+Route::get('/jobs/manage', [\App\Http\Controllers\JobController::class, 'manage'])->middleware('auth');
 
 // Single job
 Route::get('/jobs/{job}', [\App\Http\Controllers\JobController::class, 'show']);
+
+Route::post('/users', [\App\Http\Controllers\UserController::class, 'store']);
+Route::get('/register', [\App\Http\Controllers\UserController::class, 'create']);
+Route::post('/logout', [\App\Http\Controllers\UserController::class, 'logout'])->middleware('auth');
+Route::get('/login', [\App\Http\Controllers\UserController::class, 'login'])->name('login');
+Route::post('/users/auth', [\App\Http\Controllers\UserController::class, 'auth']);
+
+

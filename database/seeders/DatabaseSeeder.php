@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Job;
 use App\Models\Jobs;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,7 +17,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        Job::factory(5)->create();
+        $user = User::factory()->create([
+        'name' => 'Test User',
+        'email' => 'test@example.com',
+         ]);
+
+        Job::factory(5)->create([
+            'user_id' => $user->id
+        ]);
+
 //         \App\Models\User::factory(5)->create();
 
 //         \App\Models\User::factory(4)->create([
@@ -24,15 +33,15 @@ class DatabaseSeeder extends Seeder
 //             'email' => 'test@example.com',
 //         ]);
 
-        Job::create([
-            'title' => 'Software dev',
-            'tags' => 'laravel, javascript',
-            'company' => 'RTD Corp',
-            'location' => 'Texas, Ua',
-            'email' => 'rtd@email.com',
-            'web' => 'https://www.rtd.com',
-            'description' => 'These routes are loaded by the RouteServiceProvider and all of them will Here is where you can register web routes for your application.'
-        ]);
+//        Job::create([
+//            'title' => 'Software dev',
+//            'tags' => 'laravel, javascript',
+//            'company' => 'RTD Corp',
+//            'location' => 'Texas, Ua',
+//            'email' => 'rtd@email.com',
+//            'web' => 'https://www.rtd.com',
+//            'description' => 'These routes are loaded by the RouteServiceProvider and all of them will Here is where you can register web routes for your application.'
+//        ]);
 //
 //        Job::create([
 //            'title' => 'Hardware engineer',
@@ -43,6 +52,5 @@ class DatabaseSeeder extends Seeder
 //            'web' => 'https://www.elcr.com',
 //            'description' => 'These routes are loaded by the RouteServiceProvider and all of them will Here is where you can register web routes for your application.'
 //        ]);
-
     }
 }
