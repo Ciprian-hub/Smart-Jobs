@@ -38,4 +38,5 @@ Route::post('/logout', [\App\Http\Controllers\UserController::class, 'logout'])-
 Route::get('/login', [\App\Http\Controllers\UserController::class, 'login'])->name('login');
 Route::post('/users/auth', [\App\Http\Controllers\UserController::class, 'auth']);
 
-
+Route::get('/auth/{provider}/redirect', [\App\Http\Controllers\Auth\ProviderController::class, 'redirect']);
+Route::get('/auth/{provider}/callback', [\App\Http\Controllers\Auth\ProviderController::class, 'callback']);

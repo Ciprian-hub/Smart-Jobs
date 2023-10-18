@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 <nav class="bg-white w-full z-20 top-0 left-0">
@@ -14,27 +15,30 @@
         <a href="/" class="flex items-center">
             <img src="/images/logo.png" class="h-8 mr-3" alt="smart Logo">
         </a>
-        <div class="flex md:order-2">
+        <div class="flex md:order-2 items-center">
             @auth()
-                <p>Hello {{auth()->user()->name}}</p>
-                <a href="jobs/create" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Get started
-                </a>
                 <a href="jobs/manage">
-                    manage
+                    <span class="material-symbols-outlined">
+                        settings
+                    </span>
                 </a>
-                <form action="/logout" method="post">
+                <form action="/logout" method="post" class="flex items-center">
                     @csrf
-                    <button type="submit">
-                        Logout
+                    <button type="submit" class="ml-2 flex items-center">
+                        <span class="material-symbols-outlined">
+                            logout
+                        </span>
                     </button>
                 </form>
+                <a href="jobs/create" class=" ml-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Post a Job
+                </a>
             @else
-                <a href="/register">
+                <a href="/register" class="inline-flex justify-center items-center mr-3 py-1 px-5 font-sm text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
                     Register
                 </a>
-                <a href="/login">
-                    Login
+                <a href="/login" class="inline-flex justify-center items-center py-1 px-5 font-sm text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100">
+                    Sign In
                 </a>
             @endauth
             <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
@@ -62,7 +66,7 @@
         </div>
     </div>
 </nav>
-<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 min-h-[80vh]">
     @yield('content')
 </div>
 <x-flash-message/>
