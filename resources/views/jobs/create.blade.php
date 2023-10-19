@@ -76,22 +76,22 @@
                             @enderror
                             <label for="salary" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Salary</label>
                         </div>
-{{--                        <div class="relative z-0 w-full mb-6 group">--}}
-{{--                            <input type="text" name="level" id="level" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "--}}
-{{--                                   value="{{old('level')}}"/>--}}
-{{--                            @error('level')--}}
-{{--                            <p class="text-sm text-red-900">{{$message}}</p>--}}
-{{--                            @enderror--}}
-{{--                            <label for="level" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Level</label>--}}
-{{--                        </div>--}}
-{{--                        <div class="relative z-0 w-full mb-6 group">--}}
-{{--                            <input type="text" name="timing" id="timing" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "--}}
-{{--                                   value="{{old('timing')}}"/>--}}
-{{--                            @error('timing')--}}
-{{--                            <p class="text-sm text-red-900">{{$message}}</p>--}}
-{{--                            @enderror--}}
-{{--                            <label for="timing" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Timing</label>--}}
-{{--                        </div>--}}
+                        <div class="relative z-0 w-full mb-6 group">
+                            <input type="text" name="level" id="level" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "
+                                   value="{{old('level')}}"/>
+                            @error('level')
+                            <p class="text-sm text-red-900">{{$message}}</p>
+                            @enderror
+                            <label for="level" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Level</label>
+                        </div>
+                        <div class="relative z-0 w-full mb-6 group">
+                            <input type="text" name="program" id="program" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" "
+                                   value="{{old('program')}}"/>
+                            @error('program')
+                            <p class="text-sm text-red-900">{{$message}}</p>
+                            @enderror
+                            <label for="program" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Program</label>
+                        </div>
                             <div class="relative z-0 w-full mb-6 group">
                                 <input type="file" name="logo" id="logo" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                                 @error('logo')
@@ -100,12 +100,26 @@
                                 <label for="logo" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Company Logo</label>
                             </div>
                             <div class="relative z-0 w-full mb-6 group">
-                                <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Your message</label>
+                                <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Job Description</label>
                                 <textarea id="description"  name="description" rows="8" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
                                 @error('description')
                                 <p class="text-sm text-red-900">{{$message}}</p>
                                 @enderror
                             </div>
+                        <div class="relative z-0 w-full mb-6 group">
+                            <label for="details" class="block mb-2 text-sm font-medium text-gray-900">Company Details</label>
+                            <textarea id="details"  name="details" rows="8" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                            @error('details')
+                            <p class="text-sm text-red-900">{{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="relative z-0 w-full mb-6 group">
+                            <label for="benefits" class="block mb-2 text-sm font-medium text-gray-900">Company Benefits</label>
+                            <textarea id="benefits"  name="benefits" rows="8" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                            @error('benefits')
+                            <p class="text-sm text-red-900">{{$message}}</p>
+                            @enderror
+                        </div>
                         <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
                     </form>
                 </div>

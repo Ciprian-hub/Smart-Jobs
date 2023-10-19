@@ -29,6 +29,8 @@ Route::get('/jobs/manage', [\App\Http\Controllers\JobController::class, 'manage'
 Route::delete('/jobs/{job}', [\App\Http\Controllers\JobController::class, 'destroy'])->middleware('auth');
 // Single job
 Route::get('/jobs/{job}', [\App\Http\Controllers\JobController::class, 'show']);
+// Apply
+Route::post('/jobs/apply', [\App\Http\Controllers\JobController::class, 'jobApply']);
 
 Route::post('/users', [\App\Http\Controllers\UserController::class, 'store']);
 Route::get('/register', [\App\Http\Controllers\UserController::class, 'create']);

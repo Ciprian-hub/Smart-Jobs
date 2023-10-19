@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -38,7 +39,12 @@ class JobController extends Controller
                 'web' => 'required',
                 'tags' => 'required',
                 'salary' => 'required',
+                'level' => 'required',
+                'program' => 'required',
                 'description' => 'required',
+                'details' => 'required',
+                'benefits' => 'required',
+
             ]);
         if($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('/logos', 'public');
@@ -91,5 +97,15 @@ class JobController extends Controller
     public function manage(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('jobs.manage', ['jobs' => auth()->user()->jobs()->get()]);
+    }
+
+    public function jobApply(Job $job, Request $request)
+    {
+        dd(Job::class);
+        Application::create([
+            'user_id' => auth()->id(),
+            'job_id' => $job->id
+        ]);
+        return self::index();
     }
 }

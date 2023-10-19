@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('level');
             $table->string('program');
             $table->longText('description');
+            $table->longText('details');
+            $table->longText('benefits');
             $table->string('logo')->nullable();
             $table->timestamps();
         });

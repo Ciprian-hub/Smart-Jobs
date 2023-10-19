@@ -3,54 +3,66 @@
 @section('content')
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 mx-auto">
         <div class="col-span-1 bg-[#f5f5f5] p-5">
-            <p>Job Details</p>
-            <h3 class="text-xl">{{$job['title']}}</h3>
-            <div>
-                <p>Salary</p>
-                <p>grid grid-cols-1 gap-6 sm:grid-cols-2 mx-auto</p>
+            <div class="pl-3">
+                <p class="mt-3">Job Details</p>
+                <h3 class="text-4xl font-extrabold mt-3">{{$job['title']}}</h3>
+                <div class="flex mt-3">
+                <span class="material-symbols-outlined">
+                    pin_drop
+                </span>
+                    <p class="ml-3">{{$job['location']}}</p>
+                </div>
+                <div class="flex mt-3">
+                     <span class="material-symbols-outlined">
+                        attach_money
+                        </span>
+                    <span class="ml-3">{{$job['salary']}}</span>
+                </div>
+                <div class="flex mt-3">
+                <span class="material-symbols-outlined">
+                    tools_level
+                </span>
+                    <p class="ml-3">{{$job['level']}}</p>
+                </div>
+                <img class="rounded w-[calc(100%-3rem)] mt-3"  src="{{$job->logo ? asset('storage/' . $job->logo) : "/images/dummy.jpeg"}}"
+                     alt= "" />
             </div>
-            <div>
-                <p>Level</p>
-                <p>grid grid-cols-1 gap-6 sm:grid-cols-2 mx-auto</p>
-            </div>
-            <div>
-                <p>Location</p>
-                <p>grid grid-cols-1 gap-6 sm:grid-cols-2 mx-auto</p>
-            </div>
-{{--            <x-job-tags :jobTags="$job['tags']"/>--}}
-            <img class="rounded-t-lg p-5"  src="{{$job->logo ? asset('storage/' . $job->logo) : "/images/dummy.jpeg"}}"
-             alt= "" />
         </div>
         <div class="flex flex-col justify-between">
-            <div>
-                <div class="bg-gray-90">
-                    <form method="post" action="/jobs/{{$job->id}}">
-                        @csrf
-                        @method("DELETE")
-                        <button>
-                            delete
-                        </button>
-                    </form>
-
-                    <a href="/jobs/{{$job->id}}/edit">
-                        <button>
-                            edit
-                        </button>
-                    </a>
-                </div>
-
-                <h3>Details</h3>
-                <hr>
-                <h3>Skills</h3>
-                <div class="flex">
-                    <p>grid</p><p>grid</p><p>grid</p><p>grid</p>
-                </div>
-                <hr>
+            <div class="p-5">
                 <div>
-                    {{$job['description']}}
+                    <p class="mt-3 font-bold text-2xl">Skills</p>
+                    <hr>
+                        <x-job-tags :jobTags="$job['tags']"/>
+                </div>
+                <div>
+                    <p class="mt-3 font-bold text-2xl">Description</p>
+                    <hr>
+                    <div class="mt-3">
+                        {{$job['description']}}
+                    </div>
+                </div>
+                <div>
+                    <p class="mt-3 font-bold text-2xl">Details</p>
+                    <hr>
+                    <div class="mt-3">
+                        {{$job['details']}}
+                    </div>
+                </div>
+                <div>
+                    <p class="mt-3 font-bold text-2xl">Benefits</p>
+                    <hr>
+                    <div class="mt-3">
+                        {{$job['benefits']}}
+                    </div>
                 </div>
             </div>
-            <button type="button" class="sticky bottom-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Apply</button>
+            <form method="POST" action="/jobs/apply" enctype="multipart/form-data">
+                @csrf
+                <button type="submit" class="sticky bottom-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    Apply
+                </button>
+            </form>
         </div>
     </div>
 

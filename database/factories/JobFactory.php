@@ -43,7 +43,7 @@ class JobFactory extends Factory
     {
         return [
             'title' => self::getRandomJob($this->jobs),
-            'tags' => 'software, dev, tag3',
+            'tags' => 'cloud, develop, planning',
             'company' => fake()->company(),
             'location' => fake()->address(),
             'web' => fake()->url(),
@@ -51,7 +51,9 @@ class JobFactory extends Factory
             'level' => self::getRandomName($this->level),
             'program' => self::getProgram($this->program),
             'salary' => fake()->randomNumber(5, true),
-            'description' => fake()->paragraph(5)
+            'description' => fake()->paragraph(5),
+            'details' => fake()->paragraph(5),
+            'benefits' => fake()->paragraph(5)
         ];
     }
 }
