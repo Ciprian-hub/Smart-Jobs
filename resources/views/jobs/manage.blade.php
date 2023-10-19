@@ -4,7 +4,7 @@
     <div class="relative overflow-x-auto w-full">
         <table class="w-full text-sm text-left">
             <thead class="text-xs text-gray-700 uppercase">
-            <tr class="border-b " >
+            <tr class="border-b" >
                 <th scope="col" class="px-6 py-3">
                     Job title
                 </th>
@@ -27,16 +27,18 @@
                     {{$job['company']}}
                 </td>
                 <td class="px-6 py-4">
-                    <form method="post" action="/jobs/{{$job->id}}">
-                        @csrf
-                        @method("DELETE")
-                        <button>
-                            delete
+                    <div x-data="{ open:false }">
+                        <button  @click="open=true" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                            Delete
                         </button>
-                    </form>
+                        <div x-show="open">
+                            <x-modal-component :job="$job"/>
+                        </div>
+
+                    </div>
                     <a href="/jobs/{{$job->id}}/edit">
-                        <button type="button">
-                            edit
+                        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            Edit
                         </button>
                     </a>
                 </td>
@@ -48,30 +50,7 @@
             </tbody>
         </table>
     </div>
-    <div class="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-    </button>
 @endsection
-<script>
 
-</script>
+
 

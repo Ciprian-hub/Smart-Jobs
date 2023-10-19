@@ -18,17 +18,15 @@ Route::get('/', [\App\Http\Controllers\JobController::class, 'index']);
 //Store Jobs data
 Route::post('/jobs', [\App\Http\Controllers\JobController::class, 'store'])->middleware('auth');
 //Show create form
-Route::get('/jobs/create', [\App\Http\Controllers\JobController::class, 'create'])->middleware('auth');
+Route::get('/jobs/create', [\App\Http\Controllers\JobController::class, 'create'])->middleware('auth')->name('jobs.create');
 //Show edit form
 Route::get("/jobs/{job}/edit", [\App\Http\Controllers\JobController::class, 'edit']);
 // Edit Submit to Update
 Route::put('/jobs/{job}', [\App\Http\Controllers\JobController::class, 'update'])->middleware('auth');
+// manage Jobs
+Route::get('/jobs/manage', [\App\Http\Controllers\JobController::class, 'manage'])->middleware('auth')->name("jobs.manage");
 // Delete Job
 Route::delete('/jobs/{job}', [\App\Http\Controllers\JobController::class, 'destroy'])->middleware('auth');
-
-// manage Jobs
-Route::get('/jobs/manage', [\App\Http\Controllers\JobController::class, 'manage'])->middleware('auth');
-
 // Single job
 Route::get('/jobs/{job}', [\App\Http\Controllers\JobController::class, 'show']);
 

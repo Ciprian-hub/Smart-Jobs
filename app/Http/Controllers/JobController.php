@@ -37,6 +37,7 @@ class JobController extends Controller
                 'email' => ['required', 'email'],
                 'web' => 'required',
                 'tags' => 'required',
+                'salary' => 'required',
                 'description' => 'required',
             ]);
         if($request->hasFile('logo')) {
@@ -77,9 +78,13 @@ class JobController extends Controller
         return back()->with("message", "Job updated successfully");
     }
 
-    public function destroy(Job $job)
+    public function destroy(Job $job): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
+        if($job->user_id != auth()->id()){
+            abort(403, "Unauthorized action");
+        }
         $job->delete();
+
         return redirect('/')->with("message", "Job deleted successfully");
     }
 

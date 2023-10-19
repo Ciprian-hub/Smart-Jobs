@@ -12,6 +12,8 @@ class Job extends Model
     // Model::unguard() fom boot(): ServiceProvider allow this mass assignment
 //    protected $fillable = ['title', 'company', 'location', 'email', 'web', 'tags', 'description'];
 
+//    public mixed $user_id;
+
     public function scopeFilter($query, array $filters): void
     {
         if($filters['tag'] ?? false) {

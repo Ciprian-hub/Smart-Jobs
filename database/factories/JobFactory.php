@@ -10,6 +10,30 @@ use Illuminate\Support\Str;
  */
 class JobFactory extends Factory
 {
+    public array $program = ['Full-Time', 'Part-Time'];
+    public array $level = ["Entry", "Mid", "Expert", "Senior", "God"];
+    public array $jobs = ["Java Developer", "Frontend Developer", "DevOps Engineer", "Fullstack Web Developer", "UX/UI Designer", "Angular Specialist"];
+
+    public function getProgram($program)
+    {
+        $randIdX = array_rand($program);
+
+        return $program[$randIdX];
+    }
+    public function getRandomName($namesArray) {
+        // Generate a random index within the array's bounds
+        $randomIndex = array_rand($namesArray);
+
+        // Return the name associated with the random index
+        return $namesArray[$randomIndex];
+    }
+    public function getRandomJob($job) {
+        // Generate a random index within the array's bounds
+        $randomIndex = array_rand($job);
+
+        // Return the name associated with the random index
+        return $job[$randomIndex];
+    }
     /**
      * Define the model's default state.
      *
@@ -18,12 +42,15 @@ class JobFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->name(),
+            'title' => self::getRandomJob($this->jobs),
             'tags' => 'software, dev, tag3',
             'company' => fake()->company(),
             'location' => fake()->address(),
             'web' => fake()->url(),
             'email' => fake()->companyEmail(),
+            'level' => self::getRandomName($this->level),
+            'program' => self::getProgram($this->program),
+            'salary' => fake()->randomNumber(5, true),
             'description' => fake()->paragraph(5)
         ];
     }
