@@ -57,12 +57,20 @@
                     </div>
                 </div>
             </div>
-            <form method="POST" action="/jobs/apply" enctype="multipart/form-data">
-                @csrf
-                <button type="submit" class="sticky bottom-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    Apply
-                </button>
-            </form>
+            <div class="sticky bottom-1 mx-auto w-full">
+                <form method="POST" action="/jobs/{{$job->id}}" enctype="multipart/form-data">
+                    @csrf
+                    @if($application)
+                        <button disabled type="submit" class="w-full cursor-not-allowed sticky bottom-1 text-white hover:bg-green-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 focus:outline-none dark:focus:ring-blue-800">
+                            You applied successfully
+                        </button>
+                    @else
+                        <button type="submit" class="w-full sticky bottom-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            Apply
+                        </button>
+                    @endif
+                </form>
+            </div>
         </div>
     </div>
 

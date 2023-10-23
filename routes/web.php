@@ -30,7 +30,8 @@ Route::delete('/jobs/{job}', [\App\Http\Controllers\JobController::class, 'destr
 // Single job
 Route::get('/jobs/{job}', [\App\Http\Controllers\JobController::class, 'show']);
 // Apply
-Route::post('/jobs/apply', [\App\Http\Controllers\JobController::class, 'jobApply']);
+//Route::post('/jobs/{job}', [\App\Http\Controllers\JobController::class, 'jobApply']);
+Route::post('/jobs/{job}', [\App\Http\Controllers\JobController::class, 'apply']);
 
 Route::post('/users', [\App\Http\Controllers\UserController::class, 'store']);
 Route::get('/register', [\App\Http\Controllers\UserController::class, 'create']);

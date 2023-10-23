@@ -12,14 +12,18 @@ class JobController extends Controller
 {
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $totalJobs = Job::all()->count();
         return view('jobs.index', [
-            'job' => Job::latest()->filter(request(['tag', 'search']))->paginate(3)
+            'job' => Job::latest()->filter(request(['tag', 'search']))->paginate(3),
+            'totalJobs' => $totalJobs
         ]);
     }
     public function show(Job $job)
     {
+        $application =  Application::where('user_id', auth()->id())->where('job_id', $job->id)->count();
         return view('jobs.show', [
             'job' => $job,
+            'application' => $application,
         ]);
     }
 
@@ -99,13 +103,12 @@ class JobController extends Controller
         return view('jobs.manage', ['jobs' => auth()->user()->jobs()->get()]);
     }
 
-    public function jobApply(Job $job, Request $request)
+    public function apply(Job $job)
     {
-        dd(Job::class);
         Application::create([
             'user_id' => auth()->id(),
             'job_id' => $job->id
         ]);
-        return self::index();
+        return self::show($job);
     }
 }
