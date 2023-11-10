@@ -75,7 +75,7 @@
                 @else
                 <div class="sticky bottom-1 mx-auto w-full">
                     <button type="submit" class="w-full sticky bottom-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                        <a href="/register"> You must be register</a>
+                        <a href="/register"> You must be registered to apply</a>
                     </button>
                 </div>
             @endauth

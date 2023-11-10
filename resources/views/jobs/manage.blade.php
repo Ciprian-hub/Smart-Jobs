@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="relative overflow-x-auto w-full">
+        <h1>Your posted jobs</h1>
         <table class="w-full text-sm text-left">
             <thead class="text-xs text-gray-700 uppercase">
             <tr class="border-b" >

@@ -19,6 +19,7 @@ class UserController extends Controller
             'name' => ['required', 'min:3'],
             'email' => ['required',  'email', Rule::unique('users', 'email')],
             'password' => 'required|confirmed',
+            'user_type' => 'required'
         ]);
 
         // Hash password
@@ -58,5 +59,11 @@ class UserController extends Controller
             return redirect('/');
         }
         return back()->withErrors(["email" => "Invalid credentials"])->onlyInput('email');
+    }
+
+    function editProfile(Request $request)
+    {
+        $user = auth()->user();
+        return view('users.profile.edit')->with(compact('user'));
     }
 }

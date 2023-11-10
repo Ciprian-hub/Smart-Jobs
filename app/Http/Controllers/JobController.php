@@ -10,12 +10,14 @@ use JetBrains\PhpStorm\NoReturn;
 
 class JobController extends Controller
 {
-    public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $user = $request->user();
         $totalJobs = Job::all()->count();
         return view('jobs.index', [
             'job' => Job::latest()->filter(request(['tag', 'search']))->paginate(3),
-            'totalJobs' => $totalJobs
+            'totalJobs' => $totalJobs,
+            'user'=> $user
         ]);
     }
     public function show(Job $job)
