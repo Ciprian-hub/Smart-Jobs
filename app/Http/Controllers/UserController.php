@@ -66,4 +66,9 @@ class UserController extends Controller
         $user = auth()->user();
         return view('users.profile.edit')->with(compact('user'));
     }
+
+    public function about()
+    {
+        return view('about');
+    }
 }

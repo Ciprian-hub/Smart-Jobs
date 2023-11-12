@@ -232,7 +232,7 @@
                         fill="currentColor"/>
                 </svg>
                 <blockquote>
-                    <p class="text-2xl font-medium text-gray-900">"Flowbite is just awesome. It contains tons of
+                    <p class="text-2xl font-medium text-gray-900">"SmartJobs is just awesome. It contains tons of
                         predesigned components and pages starting from login screen to complex dashboard. Perfect choice
                         for your next SaaS application."</p>
                 </blockquote>

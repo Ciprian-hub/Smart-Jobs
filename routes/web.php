@@ -43,5 +43,6 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/users/auth', [UserController::class, 'auth']);
 Route::get('/users/profile', [UserController::class, 'editProfile'])->name('edit.profile');
 
+Route::get('/about', [UserController::class, 'about'])->name('about');
 Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);
 Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback']);
