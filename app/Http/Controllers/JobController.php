@@ -24,7 +24,10 @@ class JobController extends Controller
     public function show(Job $job)
     {
         $user = \request()->user();
-        $application =  Application::where('user_id', auth()->id())->where('job_id', $job->id)->count();
+        $application =  Application::where('user_id', auth()->id())
+            ->where('job_id', $job->id)
+            ->count();
+
         return view('jobs.show', [
             'job' => $job,
             'application' => $application,
@@ -109,10 +112,19 @@ class JobController extends Controller
 
     public function manage(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $applicants = null;
+
         $user = \request()->user();
+        $job_id = auth()->user()->jobs()->get();
+        foreach($job_id as $jobb) {
+            $applicants= $jobb['id'];
+        }
+
+        $applicants = Application::where('job_id', '=', $applicants)->get()->count();
         return view('jobs.manage', [
             'jobs' => auth()->user()->jobs()->get(),
-            'user' => $user
+            'user' => $user,
+            'applicants' => $applicants
             ]);
     }
 

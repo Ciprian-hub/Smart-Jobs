@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserDetails;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -79,6 +80,10 @@ class UserController extends Controller
         }
 
         $user->update($formFields);
+        UserDetails::create([
+            'created_by'=>$user->id,
+            'resume' => 'test'
+        ]);
 
         return back()->with("message", "Profile updated successfully");
     }
