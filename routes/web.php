@@ -42,6 +42,7 @@ Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/users/auth', [UserController::class, 'auth']);
 Route::get('/users/profile', [UserController::class, 'editProfile'])->name('edit.profile');
+Route::put('/users/{user}', [UserController::class, 'update'])->name('update.profile');
 
 Route::get('/about', [UserController::class, 'about'])->name('about');
 Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);

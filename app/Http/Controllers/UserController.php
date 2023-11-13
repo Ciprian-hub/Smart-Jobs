@@ -67,8 +67,24 @@ class UserController extends Controller
         return view('users.profile.edit')->with(compact('user'));
     }
 
-    public function about()
+    public function update(Request $request, User $user)
     {
-        return view('about');
+        $formFields = $request->validate([
+            'name' => 'required',
+            'email' => ['required', 'email'],
+        ]);
+
+        if($request->hasFile('profile_image')) {
+            $formFields['profile_image'] = $request->file('profile_image')->store('/profile_image', 'public');
+        }
+
+        $user->update($formFields);
+
+        return back()->with("message", "Profile updated successfully");
+    }
+
+    public function about(User $user)
+    {
+        return view('about')->with(compact('user'));
     }
 }

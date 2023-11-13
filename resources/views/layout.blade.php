@@ -22,7 +22,7 @@
                     <li x-data="{open: false}" class="relative list-none">
                         <a @click="open = !open" class="cursor-pointer">
                             <img class="h-8 w-8 rounded-full"
-                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                 src="{{$user->profile_image ? asset('storage/' . $user->profile_image) : "/images/dummy.jpeg"}}"
                                  alt="">
                         </a>
                         <ul x-show="open"

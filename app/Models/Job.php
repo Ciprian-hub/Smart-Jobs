@@ -16,10 +16,10 @@ class Job extends Model
 
     public function scopeFilter($query, array $filters): void
     {
-        if($filters['tag'] ?? false) {
+        if ($filters['tag'] ?? false) {
             $query->where('tags', 'like', '%' . request('tag') . "%");
         }
-        if($filters['search'] ?? false) {
+        if ($filters['search'] ?? false) {
             $query->where('title', 'like', '%' . request('search') . "%");
         }
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use JetBrains\PhpStorm\NoReturn;
@@ -22,16 +23,21 @@ class JobController extends Controller
     }
     public function show(Job $job)
     {
+        $user = \request()->user();
         $application =  Application::where('user_id', auth()->id())->where('job_id', $job->id)->count();
         return view('jobs.show', [
             'job' => $job,
             'application' => $application,
+            'user' => $user
         ]);
     }
 
     public function create()
     {
-        return view('jobs.create');
+        $user = \request()->user();
+        return view('jobs.create', [
+            'user' => $user
+        ]);
     }
 
     #[NoReturn] public function store(Request $request): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
@@ -55,6 +61,7 @@ class JobController extends Controller
         if($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('/logos', 'public');
         }
+
         $formFields['user_id'] = auth()->id();
 
         Job::create($formFields);
@@ -102,7 +109,11 @@ class JobController extends Controller
 
     public function manage(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('jobs.manage', ['jobs' => auth()->user()->jobs()->get()]);
+        $user = \request()->user();
+        return view('jobs.manage', [
+            'jobs' => auth()->user()->jobs()->get(),
+            'user' => $user
+            ]);
     }
 
     public function apply(Job $job)
