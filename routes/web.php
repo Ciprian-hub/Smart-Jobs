@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\ProviderController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\UserController;
@@ -35,6 +36,7 @@ Route::get('/jobs/{job}', [JobController::class, 'show']);
 // Apply
 Route::post('/jobs/{job}', [JobController::class, 'apply']);
 
+// TODO delete application
 
 Route::post('/users', [UserController::class, 'store']);
 Route::get('/register', [UserController::class, 'create']);

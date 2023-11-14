@@ -18,13 +18,14 @@ class JobController extends Controller
         return view('jobs.index', [
             'job' => Job::latest()->filter(request(['tag', 'search']))->paginate(3),
             'totalJobs' => $totalJobs,
-            'user'=> $user
+            'user' => $user
         ]);
     }
+
     public function show(Job $job)
     {
         $user = \request()->user();
-        $application =  Application::where('user_id', auth()->id())
+        $application = Application::where('user_id', auth()->id())
             ->where('job_id', $job->id)
             ->count();
 
@@ -60,8 +61,8 @@ class JobController extends Controller
                 'details' => 'required',
                 'benefits' => 'required',
 
-            ]);
-        if($request->hasFile('logo')) {
+        ]);
+        if ($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('/logos', 'public');
         }
 
@@ -79,7 +80,7 @@ class JobController extends Controller
 
     public function update(Request $request, Job $job)
     {
-        if($job->user_id != auth()->id()){
+        if ($job->user_id != auth()->id()) {
             abort(403, "Unauthorized action");
         }
 
@@ -92,7 +93,7 @@ class JobController extends Controller
             'tags' => 'required',
             'description' => 'required',
         ]);
-        if($request->hasFile('logo')) {
+        if ($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('/logos', 'public');
         }
         $job->update($formFields);
@@ -102,7 +103,7 @@ class JobController extends Controller
 
     public function destroy(Job $job): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        if($job->user_id != auth()->id()){
+        if ($job->user_id != auth()->id()) {
             abort(403, "Unauthorized action");
         }
         $job->delete();
@@ -110,29 +111,44 @@ class JobController extends Controller
         return redirect('/')->with("message", "Job deleted successfully");
     }
 
-    public function manage(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function manage(Job $job, User $user): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $applicants = null;
 
+        $applicants = null;
         $user = \request()->user();
         $job_id = auth()->user()->jobs()->get();
-        foreach($job_id as $jobb) {
-            $applicants= $jobb['id'];
+        foreach ($job_id as $jobb) {
+            $applicants = $jobb['id'];
         }
-
         $applicants = Application::where('job_id', '=', $applicants)->get()->count();
+        $jobsApplied = Application::where('user_id', '=', $user->id)->get();
+
+//        $foo = User::join('user_applications', 'users.id', '=', 'user_applications.user_id')->get();
+//        $fo = null;
+//        foreach ($foo as $item) {
+//            $fo = $item['job_id'];
+//        }
+
+//        $bar = Job::where('id', $user->id)->get();
+
+
         return view('jobs.manage', [
             'jobs' => auth()->user()->jobs()->get(),
             'user' => $user,
-            'applicants' => $applicants
-            ]);
+            'applicants' => $applicants,
+            'jobsApplied' => $jobsApplied
+        ]);
     }
 
     public function apply(Job $job)
     {
         Application::create([
             'user_id' => auth()->id(),
-            'job_id' => $job->id
+            'job_id' => $job->id,
+            'job_title' => $job->title,
+            'company_name' => $job->company,
+            'company_location' => $job->location,
+            'company_email' => $job->email,
         ]);
         return self::show($job);
     }
