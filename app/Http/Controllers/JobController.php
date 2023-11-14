@@ -75,7 +75,11 @@ class JobController extends Controller
 
     public function edit(Job $job)
     {
-        return view('jobs.edit', ['job' => $job]);
+        $user = \request()->user();
+        return view('jobs.edit', [
+            'job' => $job,
+            'user' => $user
+        ]);
     }
 
     public function update(Request $request, Job $job)
@@ -122,15 +126,6 @@ class JobController extends Controller
         }
         $applicants = Application::where('job_id', '=', $applicants)->get()->count();
         $jobsApplied = Application::where('user_id', '=', $user->id)->get();
-
-//        $foo = User::join('user_applications', 'users.id', '=', 'user_applications.user_id')->get();
-//        $fo = null;
-//        foreach ($foo as $item) {
-//            $fo = $item['job_id'];
-//        }
-
-//        $bar = Job::where('id', $user->id)->get();
-
 
         return view('jobs.manage', [
             'jobs' => auth()->user()->jobs()->get(),
