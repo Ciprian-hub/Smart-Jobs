@@ -26,6 +26,9 @@ class UserController extends Controller
         // Hash password
         $formFields['password'] = bcrypt($formFields['password']);
 
+        if($request->hasFile('profile_image')) {
+            $formFields['profile_image'] = $request->file('profile_image')->store('/profile_image', 'public');
+        }
         // Create user
         $user = User::create($formFields);
 
@@ -62,7 +65,7 @@ class UserController extends Controller
         return back()->withErrors(["email" => "Invalid credentials"])->onlyInput('email');
     }
 
-    function editProfile(Request $request)
+    function editProfile()
     {
         $user = auth()->user();
         return view('users.profile.edit')->with(compact('user'));
@@ -88,8 +91,9 @@ class UserController extends Controller
         return back()->with("message", "Profile updated successfully");
     }
 
-    public function about(User $user)
+    public function about(Request $request)
     {
+        $user = $request->user();
         return view('about')->with(compact('user'));
     }
 }

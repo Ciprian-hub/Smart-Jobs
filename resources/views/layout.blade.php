@@ -7,6 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.css" rel="stylesheet" />
+
+    <script
+        src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.min.js"
+        defer
+    ></script>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 </head>
@@ -18,46 +25,74 @@
         </a>
         <div class="flex md:order-2 items-center">
             @auth()
-                <div class="relative ml-3">
-                    <li x-data="{open: false}" class="relative list-none">
-                        <a @click="open = !open" class="cursor-pointer">
-                            <img class="h-8 w-8 rounded-full"
-                                 src="{{$user->profile_image ? asset('storage/' . $user->profile_image) : "/images/dummy.jpeg"}}"
-                                 alt="">
-                        </a>
-                        <ul x-show="open"
-                            x-cloak
-                            x-transition
-                            @click.outside="open = false"
-                            class="absolute z-10 right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg"
-
-                        >
-                            <li class="px-4 py-2 cursor-pointer hover:bg-gray-100">
-                                <a href="{{route('edit.profile')}}">Edit Profile</a>
-                            </li>
-                            <li class="px-4 py-2 cursor-pointer hover:bg-gray-100">
-                                <a href="{{route('jobs.manage')}}">Your Jobs</a>
-                            </li>
-                            <li class="px-4 py-2 cursor-pointer hover:bg-gray-100">
-                                <a href="{{route('jobs.manage')}}">Applies</a>
-                            </li>
-                            <li class="px-4 py-2 cursor-pointer hover:bg-gray-100">
-                                <form action="/logout" method="post" class="flex items-center">
-                                    @csrf
-                                    <button type="submit" class="flex items-center">
-                                        Logout
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                </div>
                 @if(auth()->user()->user_type == 'seeker')
+                    <div class="relative ml-3">
+                        <li x-data="{open: false}" class="relative list-none">
+                            <a @click="open = !open" class="cursor-pointer">
+                                <img class="h-8 w-8 rounded-full"
+                                     src="{{$user->profile_image ? asset('storage/' . $user->profile_image) : "/images/dummy.jpeg"}}"
+                                     alt="">
+                            </a>
+                            <ul x-show="open"
+                                x-cloak
+                                x-transition
+                                @click.outside="open = false"
+                                class="absolute z-10 right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg"
+
+                            >
+                                <li class="px-4 py-2 cursor-pointer hover:bg-gray-100">
+                                    <a href="{{route('edit.profile')}}">Edit Profile</a>
+                                </li>
+                                <li class="px-4 py-2 cursor-pointer hover:bg-gray-100">
+                                    <a href="{{route('jobs.manage')}}">Applies</a>
+                                </li>
+                                <li class="px-4 py-2 cursor-pointer hover:bg-gray-100">
+                                    <form action="/logout" method="post" class="flex items-center">
+                                        @csrf
+                                        <button type="submit" class="flex items-center">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
                     <a href="{{route('jobs.create')}}"
                        class=" ml-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Find a Job
                     </a>
                 @else
+                    <div class="relative ml-3">
+                        <li x-data="{open: false}" class="relative list-none">
+                            <a @click="open = !open" class="cursor-pointer">
+                                <img class="h-8 w-8 rounded-full"
+                                     src="{{$user->profile_image ? asset('storage/' . $user->profile_image) : "/images/dummy.jpeg"}}"
+                                     alt="">
+                            </a>
+                            <ul x-show="open"
+                                x-cloak
+                                x-transition
+                                @click.outside="open = false"
+                                class="absolute z-10 right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg"
+
+                            >
+                                <li class="px-4 py-2 cursor-pointer hover:bg-gray-100">
+                                    <a href="{{route('edit.profile')}}">Edit Profile</a>
+                                </li>
+                                <li class="px-4 py-2 cursor-pointer hover:bg-gray-100">
+                                    <a href="{{route('jobs.manage')}}">Your Jobs</a>
+                                </li>
+                                <li class="px-4 py-2 cursor-pointer hover:bg-gray-100">
+                                    <form action="/logout" method="post" class="flex items-center">
+                                        @csrf
+                                        <button type="submit" class="flex items-center">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
                     <a href="{{route('jobs.create')}}"
                        class=" ml-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Post a Job
@@ -107,6 +142,7 @@
         </div>
     </div>
 </nav>
+
 <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 min-h-[80vh]">
     @yield('content')
 </div>
