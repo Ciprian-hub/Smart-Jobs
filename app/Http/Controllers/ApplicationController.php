@@ -7,8 +7,5 @@ use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
-    public function delete(Application $application)
-    {
-            dd($application);
-    }
+
 }

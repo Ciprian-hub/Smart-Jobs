@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestEmail;
 use App\Models\Application;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 use JetBrains\PhpStorm\NoReturn;
 
@@ -137,6 +139,9 @@ class JobController extends Controller
 
     public function apply(Job $job)
     {
+        $userName = \request()->user()->name;
+        $userEmail =\request()->user()->email;
+
         Application::create([
             'user_id' => auth()->id(),
             'job_id' => $job->id,
@@ -145,6 +150,9 @@ class JobController extends Controller
             'company_location' => $job->location,
             'company_email' => $job->email,
         ]);
+
+        Mail::to($job->email)->send(new TestEmail($userName, $userEmail));
+
         return self::show($job);
     }
 }

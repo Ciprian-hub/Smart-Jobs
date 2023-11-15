@@ -7,9 +7,9 @@ $tags = explode(',', $jobTags)
 <div>
     <div class="flex">
         @foreach($tags as $tag)
-                <a href="/?tag={{$tag}}" class="mr-3 px-5 mt-5 mb-5 text-xm font-xs text-white focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                    {{$tag}}
-                </a>
+            <a href="/?tag={{$tag}}" class="mr-1 bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md  mb-2">
+                {{$tag}}
+            </a>
         @endforeach
     </div>
 </div>
