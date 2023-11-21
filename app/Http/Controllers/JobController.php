@@ -46,7 +46,7 @@ class JobController extends Controller
         ]);
     }
 
-    #[NoReturn] public function store(Request $request): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    public function store(Request $request): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         //store jobs data
         $formFields = $request->validate([
@@ -137,20 +137,21 @@ class JobController extends Controller
         ]);
     }
 
-    public function apply(Job $job)
+    public function apply(Job $job, Request $request)
     {
-        $userName = \request()->user()->name;
-        $userEmail =\request()->user()->email;
+        $userName = $request->user()->name;
+        $userEmail = $request->user()->email;
 
-        Application::create([
-            'user_id' => auth()->id(),
-            'job_id' => $job->id,
-            'job_title' => $job->title,
-            'company_name' => $job->company,
-            'company_location' => $job->location,
-            'company_email' => $job->email,
-        ]);
-
+//        Application::create([
+//            'user_id' => auth()->id(),
+//            'job_id' => $job->id,
+//            'job_title' => $job->title,
+//            'company_name' => $job->company,
+//            'company_location' => $job->location,
+//            'company_email' => $job->email,
+//        ]);
+        $check  = Application::select('user_id')->get()->last();
+        dd($check);
         Mail::to($job->email)->send(new TestEmail($userName, $userEmail));
 
         return self::show($job);
