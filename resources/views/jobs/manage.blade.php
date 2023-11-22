@@ -41,6 +41,9 @@
                                 {{$job['company']}}
                             </td>
                             <td>
+                                @foreach($user_name as $item)
+                                    {{$item['name']}}
+                                @endforeach
                                 {{$applicants}} applicant/s on this job
                             </td>
                             <td class="px-6 py-4">

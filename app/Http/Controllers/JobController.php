@@ -120,16 +120,24 @@ class JobController extends Controller
     public function manage(Job $job, User $user): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
 
-        $applicants = null;
+        $actualJob = null;
         $user = \request()->user();
         $job_id = auth()->user()->jobs()->get();
+
         foreach ($job_id as $jobb) {
-            $applicants = $jobb['id'];
+            $actualJob = $jobb['id'];
         }
-        $applicants = Application::where('job_id', '=', $applicants)->get()->count();
+
+        $applicants = Application::where('job_id', '=', $actualJob)->get()->count();
         $jobsApplied = Application::where('user_id', '=', $user->id)->get();
 
+        $user_name = Application::join('users', 'user_applications.user_id', '=', 'users.id')
+            ->select('job_title', 'users.id', 'users.name', 'job_id')
+            ->where('job_id', '=', $actualJob)
+            ->get();
+
         return view('jobs.manage', [
+            'user_name' => $user_name,
             'jobs' => auth()->user()->jobs()->get(),
             'user' => $user,
             'applicants' => $applicants,
@@ -142,16 +150,15 @@ class JobController extends Controller
         $userName = $request->user()->name;
         $userEmail = $request->user()->email;
 
-//        Application::create([
-//            'user_id' => auth()->id(),
-//            'job_id' => $job->id,
-//            'job_title' => $job->title,
-//            'company_name' => $job->company,
-//            'company_location' => $job->location,
-//            'company_email' => $job->email,
-//        ]);
-        $check  = Application::select('user_id')->get()->last();
-        dd($check);
+        Application::create([
+            'user_id' => auth()->id(),
+            'job_id' => $job->id,
+            'job_title' => $job->title,
+            'company_name' => $job->company,
+            'company_location' => $job->location,
+            'company_email' => $job->email,
+        ]);
+
         Mail::to($job->email)->send(new TestEmail($userName, $userEmail));
 
         return self::show($job);

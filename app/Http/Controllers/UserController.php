@@ -23,12 +23,14 @@ class UserController extends Controller
             'user_type' => 'required'
         ]);
 
-        // Hash password
+        // Crypt password
         $formFields['password'] = bcrypt($formFields['password']);
 
         if($request->hasFile('profile_image')) {
             $formFields['profile_image'] = $request->file('profile_image')->store('/profile_image', 'public');
         }
+        $formFields['profile_image'] = " ";
+
         // Create user
         $user = User::create($formFields);
 
