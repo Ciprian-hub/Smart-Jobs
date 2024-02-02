@@ -15,6 +15,7 @@ class JobController extends Controller
 {
     public function index(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $data = $request->session()->all();
         $user = $request->user();
         $totalJobs = Job::all()->count();
         return view('jobs.index', [
@@ -63,11 +64,12 @@ class JobController extends Controller
                 'details' => 'required',
                 'benefits' => 'required',
 
+
         ]);
         if ($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('/logos', 'public');
         }
-
+        $formFields['test'] = 'sda';
         $formFields['user_id'] = auth()->id();
 
         Job::create($formFields);
@@ -158,6 +160,8 @@ class JobController extends Controller
             'company_location' => $job->location,
             'company_email' => $job->email,
         ]);
+
+       // TODO verify if user has applied and then send email
 
         Mail::to($job->email)->send(new TestEmail($userName, $userEmail));
 
