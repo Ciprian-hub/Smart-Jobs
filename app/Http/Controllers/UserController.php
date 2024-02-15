@@ -30,6 +30,7 @@ class UserController extends Controller
             $formFields['profile_image'] = $request->file('profile_image')->store('/profile_image', 'public');
         }
         $formFields['profile_image'] = " ";
+        $formFields['isAdmin'] = " ";
 
         // Create user
         $user = User::create($formFields);
