@@ -1,6 +1,8 @@
  <?php
 
+ use App\Http\Controllers\Api\ApplicationsController;
  use App\Http\Controllers\Api\JobsController;
+ use App\Http\Controllers\Api\UsersController;
  use App\Http\Controllers\AuthController;
  use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +24,8 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
     Route::get('/jobs', [JobsController::class, 'getJobs']);
+    Route::get('/users', [UsersController::class, 'getUsers']);
+    Route::get('/applications', [ApplicationsController::class, 'getApplications']);
 });
 
 Route::post('/login', [AuthController::class, 'login']);
