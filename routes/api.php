@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
     Route::get('/jobs', [JobsController::class, 'getJobs']);
+    Route::get('/users-count', [UsersController::class, 'getUsersCount']);
     Route::get('/users', [UsersController::class, 'getUsers']);
     Route::get('/applications', [ApplicationsController::class, 'getApplications']);
 });

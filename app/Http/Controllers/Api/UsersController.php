@@ -8,8 +8,14 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    public function getUsers()
+    public function getUsersCount()
     {
         return User::all()->count();
+
+    }
+
+    public function getUsers()
+    {
+        return User::all();
     }
 }
