@@ -14,8 +14,13 @@ class UsersController extends Controller
 
     }
 
-    public function getUsers()
+    public function getUsersType()
     {
-        return User::all();
+        $userTypeSeeker = User::where('user_type', 'seeker')->count();
+        $userTypeEmployer = User::where('user_type', 'employer')->count();
+        return [
+           'seekers' => $userTypeSeeker,
+           'employers' => $userTypeEmployer
+        ];
     }
 }

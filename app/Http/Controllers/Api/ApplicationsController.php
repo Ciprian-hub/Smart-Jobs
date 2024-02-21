@@ -10,6 +10,11 @@ class ApplicationsController extends Controller
 {
     public function getApplications()
     {
-      return Application::all()->count();
+        $applicant = Application::query()
+            ->join('users', 'user_id', '=', 'users.id')
+            ->join('jobs', 'job_id', '=', 'jobs.id')
+            ->select('users.name', 'company_name', 'jobs.title', 'jobs.salary', 'jobs.level')
+            ->get()->limit(5);
+      return $applicant;
     }
 }
